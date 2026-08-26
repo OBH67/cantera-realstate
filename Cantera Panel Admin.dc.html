@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F2EA;color:#0B1B2B;font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0B1B2B;text-decoration:none}
+a:hover{color:#A98A52}
+::selection{background:#A98A52;color:#FFFFFF}
+img{display:block}
+input,select,textarea,button{font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#A98A52 !important;box-shadow:0 0 0 3px rgba(169,138,82,0.14)}
+input::placeholder,textarea::placeholder{color:#B4AFA2}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@media (prefers-reduced-motion: reduce){[data-motion]{animation:none !important;transition:none !important}}
+@media (max-width:1099px){[data-desk]{display:none !important}}
+@media (min-width:1100px){[data-mob]{display:none !important}}
+</style>
+</helmet>
+
+<div style="display:grid;grid-template-columns:{{ shellCols }};min-height:100vh;align-items:stretch">
+  <aside data-desk="1" style="background:#0B1B2B;border-right:1px solid rgba(245,242,234,0.08);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:auto">
+    <div style="padding:22px 22px 26px;border-bottom:1px solid rgba(245,242,234,0.09);display:flex;align-items:center;gap:12px">
+      <span style="width:36px;height:36px;border:1px solid rgba(201,169,106,0.85);display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;color:#C9A96A;flex-shrink:0">C</span>
+      <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+        <span style="font-size:14px;font-weight:600;letter-spacing:0.2em;color:#F5F2EA">CANTERA</span>
+        <span style="font-size:8px;font-weight:500;letter-spacing:0.3em;color:rgba(233,228,216,0.55)">PANEL INTERNO</span>
+      </span>
+    </div>
+    <div style="padding:24px 14px 10px">
+      <div style="padding:0 10px 12px;font-size:9.5px;letter-spacing:0.24em;text-transform:uppercase;font-weight:700;color:rgba(233,228,216,0.4)">Operación</div>
+      <sc-for list="{{ navMain }}" as="item" hint-placeholder-count="4">
+        <button onClick="{{ item.go }}" style="{{ item.style }}">
+          <span style="{{ item.dot }}"></span>
+          <span style="flex:1;text-align:left">{{ item.label }}</span>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:0.06em;color:#0B1B2B;background:#C9A96A;padding:3px 7px;border-radius:2px">{{ item.badgeLabel }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <div style="padding:18px 14px 10px">
+      <div style="padding:0 10px 12px;font-size:9.5px;letter-spacing:0.24em;text-transform:uppercase;font-weight:700;color:rgba(233,228,216,0.4)">Sitio público</div>
+      <a href="Cantera Home.dc.html" style="display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:2px;font-size:13.5px;font-weight:500;color:rgba(233,228,216,0.72)" style-hover="color:#C9A96A">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
+        Ver home
+      </a>
+      <a href="Cantera Propiedad.dc.html" style="display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:2px;font-size:13.5px;font-weight:500;color:rgba(233,228,216,0.72)" style-hover="color:#C9A96A">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
+        Ver ficha
+      </a>
+    </div>
+    <div style="margin-top:auto;padding:18px;border-top:1px solid rgba(245,242,234,0.09);display:flex;align-items:center;gap:12px">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&amp;w=200&amp;auto=format&amp;fit=crop" alt="Mariana Escobedo" style="width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0">
+      <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+        <span style="font-size:13px;font-weight:600;color:#F5F2EA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Mariana Escobedo</span>
+        <span style="font-size:11px;font-weight:300;color:rgba(233,228,216,0.55)">Asesora senior</span>
+      </span>
+    </div>
+  </aside>
+
+  <main style="min-width:0;background:#F5F2EA">
+    <header style="position:sticky;top:0;z-index:40;background:rgba(245,242,234,0.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(11,27,43,0.1)">
+      <div style="padding:0 clamp(16px,3vw,36px);height:74px;display:flex;align-items:center;gap:18px">
+        <div style="min-width:0;flex:1">
+          <div style="font-size:9.5px;letter-spacing:0.24em;text-transform:uppercase;font-weight:700;color:#A98A52">{{ crumb }}</div>
+          <div style="margin-top:5px;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(21px,2.4vw,28px);line-height:1.1;color:#0B1B2B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pageTitle }}</div>
+        </div>
+        <label data-desk="1" style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid rgba(11,27,43,0.12);border-radius:2px;padding:11px 14px;width:min(280px,26vw)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8B8578" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <input type="search" placeholder="Buscar ficha, clave o zona" style="border:0;background:transparent;font-size:13px;color:#0B1B2B;width:100%">
+        </label>
+        <button data-desk="1" aria-label="Notificaciones" style="position:relative;width:42px;height:42px;background:#FFFFFF;border:1px solid rgba(11,27,43,0.12);border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#57544B;transition:border-color .25s ease" style-hover="border-color:#A98A52;color:#A98A52">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M18 9a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6"></path><path d="M10.3 20a2 2 0 0 0 3.4 0"></path></svg>
+          <span style="position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:#C0402B;border:1.5px solid #FFFFFF"></span>
+        </button>
+        <button onClick="{{ goNueva }}" style="display:inline-flex;align-items:center;gap:9px;background:#0B1B2B;color:#F5F2EA;border:0;font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:15px 20px;border-radius:2px;cursor:pointer;transition:background .25s ease;flex-shrink:0" style-hover="background:#A98A52">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+          <span data-desk="1">Nueva propiedad</span>
+        </button>
+      </div>
+      <div data-mob="1" style="display:flex;gap:8px;padding:0 clamp(16px,3vw,36px) 14px;overflow:auto">
+        <sc-for list="{{ navMain }}" as="item" hint-placeholder-count="4">
+          <button onClick="{{ item.go }}" style="{{ item.pillStyle }}">{{ item.label }}</button>
+        </sc-for>
+      </div>
+    </header>
+
+    <sc-if value="{{ isPanel }}" hint-placeholder-val="{{ true }}">
+      <div data-motion="1" style="padding:clamp(22px,3vw,36px) clamp(16px,3vw,36px) 60px;animation:fadeUp .4s ease both">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <div style="font-size:13.5px;font-weight:300;color:#8B8578">Métricas del sitio · <span style="font-weight:600;color:#0B1B2B">{{ rangeLabel }}</span> · comparado con el periodo anterior</div>
+          <div style="display:flex;gap:6px;background:#FFFFFF;border:1px solid rgba(11,27,43,0.12);border-radius:2px;padding:4px">
+            <sc-for list="{{ ranges }}" as="r" hint-placeholder-count="3">
+              <button onClick="{{ r.pick }}" style="{{ r.style }}">{{ r.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(224px,100%),1fr));gap:16px">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+            <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:22px 22px 20px">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+                <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#8B8578;max-width:15ch">{{ k.label }}</span>
+                <span style="{{ k.deltaStyle }}">{{ k.delta }}</span>
+              </div>
+              <div style="margin-top:16px;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(34px,3.4vw,44px);line-height:1;color:#0B1B2B">{{ k.value }}</div>
+              <div style="margin-top:8px;font-size:12.5px;font-weight:300;color:#8B8578">{{ k.note }}</div>
+              <div style="margin-top:16px;height:34px;display:flex;align-items:flex-end;gap:3px">
+                <sc-for list="{{ k.spark }}" as="b" hint-placeholder-count="12">
+                  <span data-motion="1" style="{{ b.style }}"></span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:16px;display:grid;grid-template-columns:{{ chartCols }};gap:16px;align-items:stretch">
+          <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:24px clamp(18px,2.2vw,26px) 20px;min-width:0">
+            <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap">
+              <div>
+                <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Tráfico y solicitudes</div>
+                <div style="margin-top:8px;font-family:'Instrument Serif',Georgia,serif;font-size:26px;line-height:1.1;color:#0B1B2B">Sesiones por semana</div>
+              </div>
+              <div style="display:flex;gap:18px">
+                <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:#57544B"><span style="width:10px;height:10px;border-radius:2px;background:#0B1B2B"></span>Sesiones</span>
+                <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:#57544B"><span style="width:10px;height:10px;border-radius:2px;background:#C9A96A"></span>Solicitudes</span>
+              </div>
+            </div>
+            <div style="margin-top:26px;display:flex;align-items:flex-end;gap:clamp(6px,1.2vw,14px);height:clamp(180px,22vw,240px);border-bottom:1px solid rgba(11,27,43,0.14);padding-bottom:1px">
+              <sc-for list="{{ chart }}" as="c" hint-placeholder-count="10">
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end">
+                  <div style="width:100%;display:flex;align-items:flex-end;justify-content:center;gap:3px;height:100%">
+                    <span data-motion="1" title="{{ c.tipA }}" style="{{ c.styleA }}"></span>
+                    <span data-motion="1" title="{{ c.tipB }}" style="{{ c.styleB }}"></span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:clamp(6px,1.2vw,14px)">
+              <sc-for list="{{ chart }}" as="c" hint-placeholder-count="10">
+                <span style="flex:1;min-width:0;text-align:center;font-size:10.5px;font-weight:500;color:#8B8578;white-space:nowrap;overflow:hidden">{{ c.label }}</span>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+            <div style="background:#0B1B2B;border-radius:3px;padding:24px 24px 20px">
+              <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#C9A96A">Inventario publicado</div>
+              <div style="margin-top:18px;display:flex;flex-direction:column">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid rgba(245,242,234,0.13)"><span style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#F5F2EA"><span style="width:7px;height:7px;border-radius:50%;background:#4FBF8B"></span>Disponible</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:22px;color:#F5F2EA">42</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid rgba(245,242,234,0.13)"><span style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#F5F2EA"><span style="width:7px;height:7px;border-radius:50%;background:#D9A441"></span>Apartado</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:22px;color:#F5F2EA">7</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid rgba(245,242,234,0.13)"><span style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#F5F2EA"><span style="width:7px;height:7px;border-radius:50%;background:#7FA6D9"></span>Rentado</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:22px;color:#F5F2EA">19</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid rgba(245,242,234,0.13);border-bottom:1px solid rgba(245,242,234,0.13)"><span style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#F5F2EA"><span style="width:7px;height:7px;border-radius:50%;background:#98A2AE"></span>Vendido</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:22px;color:#F5F2EA">31</span></div>
+              </div>
+              <div style="margin-top:18px;display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+                <span style="font-size:12px;font-weight:300;color:rgba(233,228,216,0.6)">3 fichas sin fotografía profesional</span>
+                <button onClick="{{ goPropiedades }}" style="background:transparent;border:0;color:#C9A96A;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;padding:0" style-hover="color:#F5F2EA">Revisar</button>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:24px;flex:1">
+              <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Origen del tráfico</div>
+              <div style="margin-top:18px;display:flex;flex-direction:column;gap:16px">
+                <sc-for list="{{ sources }}" as="s" hint-placeholder-count="4">
+                  <div>
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:13px;font-weight:500;color:#0B1B2B">{{ s.label }}</span><span style="font-size:12.5px;font-weight:600;color:#57544B">{{ s.pct }}</span></div>
+                    <div style="margin-top:8px;height:5px;background:rgba(11,27,43,0.09);border-radius:3px;overflow:hidden"><span data-motion="1" style="{{ s.barStyle }}"></span></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;display:grid;grid-template-columns:{{ chartCols }};gap:16px;align-items:start">
+          <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;overflow:hidden;min-width:0">
+            <div style="padding:22px 24px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid rgba(11,27,43,0.1)">
+              <div>
+                <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Desempeño por ficha</div>
+                <div style="margin-top:8px;font-family:'Instrument Serif',Georgia,serif;font-size:24px;line-height:1.1;color:#0B1B2B">Propiedades más vistas</div>
+              </div>
+              <button onClick="{{ goPropiedades }}" style="background:transparent;border:0;border-bottom:1px solid rgba(11,27,43,0.3);color:#0B1B2B;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;padding:0 0 5px" style-hover="color:#A98A52">Ver todas</button>
+            </div>
+            <div style="overflow-x:auto">
+              <table style="width:100%;border-collapse:collapse;min-width:620px">
+                <thead>
+                  <tr>
+                    <th style="text-align:left;padding:14px 24px;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#8B8578;background:#FAF8F2;border-bottom:1px solid rgba(11,27,43,0.09)">Propiedad</th>
+                    <th style="text-align:left;padding:14px 16px;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#8B8578;background:#FAF8F2;border-bottom:1px solid rgba(11,27,43,0.09)">Estatus</th>
+                    <th style="text-align:right;padding:14px 16px;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#8B8578;background:#FAF8F2;border-bottom:1px solid rgba(11,27,43,0.09)">Vistas</th>
+                    <th style="text-align:right;padding:14px 16px;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#8B8578;background:#FAF8F2;border-bottom:1px solid rgba(11,27,43,0.09)">Solicitudes</th>
+                    <th style="text-align:right;padding:14px 24px;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#8B8578;background:#FAF8F2;border-bottom:1px solid rgba(11,27,43,0.09)">Conversión</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+                    <tr style="border-bottom:1px solid rgba(11,27,43,0.07)" style-hover="background:#FAF8F2">
+                      <td style="padding:16px 24px">
+                        <span style="display:flex;align-items:center;gap:13px">
+                          <img src="{{ r.img }}" alt="" style="width:52px;height:40px;border-radius:2px;object-fit:cover;flex-shrink:0">
+                          <span style="display:flex;flex-direction:column;gap:3px;min-width:0">
+                            <span style="font-size:13.5px;font-weight:600;color:#0B1B2B">{{ r.name }}</span>
+                            <span style="font-size:11.5px;font-weight:300;color:#8B8578">{{ r.meta }}</span>
+                          </span>
+                        </span>
+                      </td>
+                      <td style="padding:16px"><span style="{{ r.badgeStyle }}"><span style="{{ r.dotStyle }}"></span>{{ r.status }}</span></td>
+                      <td style="padding:16px;text-align:right;font-size:13.5px;font-weight:600;color:#0B1B2B">{{ r.views }}</td>
+                      <td style="padding:16px;text-align:right;font-size:13.5px;font-weight:600;color:#0B1B2B">{{ r.leads }}</td>
+                      <td style="padding:16px 24px;text-align:right;font-size:13.5px;font-weight:600;color:#A98A52">{{ r.conv }}</td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:24px;min-width:0">
+            <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Actividad reciente</div>
+            <div style="margin-top:20px;display:flex;flex-direction:column">
+              <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:30px 1fr;gap:12px;padding:15px 0;border-top:1px solid rgba(11,27,43,0.09)">
+                  <span style="width:30px;height:30px;border-radius:50%;background:#F5F2EA;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:13px;color:#A98A52">{{ a.tag }}</span>
+                  <span style="min-width:0">
+                    <span style="display:block;font-size:13.5px;font-weight:500;color:#0B1B2B;line-height:1.45">{{ a.text }}</span>
+                    <span style="display:block;margin-top:4px;font-size:11.5px;font-weight:300;color:#8B8578">{{ a.time }}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isNueva }}" hint-placeholder-val="{{ false }}">
+      <div data-motion="1" style="padding:clamp(22px,3vw,36px) clamp(16px,3vw,36px) 110px;animation:fadeUp .4s ease both">
+        <div style="display:flex;align-items:center;gap:clamp(10px,2vw,22px);flex-wrap:wrap">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+            <span style="display:flex;align-items:center;gap:11px">
+              <span style="{{ s.numStyle }}">{{ s.num }}</span>
+              <span style="{{ s.labelStyle }}">{{ s.label }}</span>
+              <sc-if value="{{ s.sep }}" hint-placeholder-val="{{ true }}"><span style="width:clamp(14px,3vw,40px);height:1px;background:rgba(11,27,43,0.2);display:block"></span></sc-if>
+            </span>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:26px;display:grid;grid-template-columns:{{ formCols }};gap:16px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+            <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:clamp(22px,2.6vw,32px)">
+              <div style="display:flex;align-items:baseline;gap:12px">
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:20px;color:#DCCFAE">01</span>
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-size:24px;color:#0B1B2B">Clasificación</span>
+              </div>
+              <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:22px">
+                <div>
+                  <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Tipo de activo</div>
+                  <div style="margin-top:11px;display:flex;gap:8px">
+                    <sc-for list="{{ tipos }}" as="t" hint-placeholder-count="2">
+                      <button onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Operación</div>
+                  <div style="margin-top:11px;display:flex;gap:8px">
+                    <sc-for list="{{ operaciones }}" as="o" hint-placeholder-count="3">
+                      <button onClick="{{ o.pick }}" style="{{ o.style }}">{{ o.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Estatus de publicación</div>
+                  <div style="margin-top:11px;display:flex;gap:8px;flex-wrap:wrap">
+                    <sc-for list="{{ estatus }}" as="e" hint-placeholder-count="4">
+                      <button onClick="{{ e.pick }}" style="{{ e.style }}"><span style="{{ e.dot }}"></span>{{ e.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:clamp(22px,2.6vw,32px)">
+              <div style="display:flex;align-items:baseline;gap:12px">
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:20px;color:#DCCFAE">02</span>
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-size:24px;color:#0B1B2B">Identificación y ubicación</span>
+              </div>
+              <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:18px">
+                <label style="display:flex;flex-direction:column;gap:9px;grid-column:1/-1">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Nombre de la propiedad</span>
+                  <input type="text" value="{{ f_nombre }}" onChange="{{ set_nombre }}" placeholder="Nave AAA El Marqués" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Clave de ficha</span>
+                  <input type="text" value="{{ f_clave }}" onChange="{{ set_clave }}" placeholder="CTR-IND-0000" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Zona / municipio</span>
+                  <select value="{{ f_zona }}" onChange="{{ set_zona }}" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;appearance:none;transition:border-color .2s ease,box-shadow .2s ease">
+                    <option value="El Marqués">El Marqués</option>
+                    <option value="Colón — Zona Aeropuerto">Colón — Zona Aeropuerto</option>
+                    <option value="Corredor 5 de Febrero">Corredor 5 de Febrero</option>
+                    <option value="Centro Sur">Centro Sur</option>
+                    <option value="Juriquilla">Juriquilla</option>
+                    <option value="Corregidora">Corregidora</option>
+                  </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px;grid-column:1/-1">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Dirección exacta <span style="font-weight:400;letter-spacing:0.02em;text-transform:none;color:#8B8578">— no se publica, uso interno</span></span>
+                  <input type="text" value="{{ f_dir }}" onChange="{{ set_dir }}" placeholder="Carr. Estatal 200 Km 4.5, Parque Industrial El Marqués" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+              </div>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:clamp(22px,2.6vw,32px)">
+              <div style="display:flex;align-items:baseline;gap:12px">
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:20px;color:#DCCFAE">03</span>
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-size:24px;color:#0B1B2B">Superficies, técnica y precio</span>
+              </div>
+              <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:18px">
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Superficie rentable (m²)</span>
+                  <input type="text" inputmode="numeric" value="{{ f_m2 }}" onChange="{{ set_m2 }}" placeholder="12500" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Terreno (m²)</span>
+                  <input type="text" inputmode="numeric" value="{{ f_terreno }}" onChange="{{ set_terreno }}" placeholder="19800" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Altura libre (m)</span>
+                  <input type="text" inputmode="decimal" value="{{ f_altura }}" onChange="{{ set_altura }}" placeholder="12.20" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Andenes de carga</span>
+                  <input type="text" inputmode="numeric" value="{{ f_andenes }}" onChange="{{ set_andenes }}" placeholder="14" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Subestación (KVA)</span>
+                  <input type="text" inputmode="numeric" value="{{ f_kva }}" onChange="{{ set_kva }}" placeholder="2500" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Año de construcción</span>
+                  <input type="text" inputmode="numeric" value="{{ f_anio }}" onChange="{{ set_anio }}" placeholder="2022" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+              </div>
+              <div style="margin-top:22px;padding-top:22px;border-top:1px solid rgba(11,27,43,0.1);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:18px;align-items:end">
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">{{ precioLabel }}</span>
+                  <span style="display:flex;align-items:center;border:1px solid rgba(11,27,43,0.16);border-radius:2px;background:#FFFFFF;overflow:hidden">
+                    <span style="padding:0 12px 0 15px;font-size:14.5px;font-weight:600;color:#8B8578">$</span>
+                    <input type="text" inputmode="numeric" value="{{ f_precio }}" onChange="{{ set_precio }}" placeholder="95" style="border:0;padding:14px 15px 14px 0;font-size:14.5px;color:#0B1B2B;background:transparent;width:100%">
+                    <span style="padding:0 15px;font-size:12px;font-weight:600;letter-spacing:0.08em;color:#8B8578;white-space:nowrap">MXN</span>
+                  </span>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Cuota de mantenimiento</span>
+                  <input type="text" value="{{ f_mant }}" onChange="{{ set_mant }}" placeholder="8.50 MXN / m²" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:9px">
+                  <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Divisible desde (m²)</span>
+                  <input type="text" inputmode="numeric" value="{{ f_div }}" onChange="{{ set_div }}" placeholder="6000" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;color:#0B1B2B;background:#FFFFFF;transition:border-color .2s ease,box-shadow .2s ease">
+                </label>
+              </div>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:clamp(22px,2.6vw,32px)">
+              <div style="display:flex;align-items:baseline;gap:12px">
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:20px;color:#DCCFAE">04</span>
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-size:24px;color:#0B1B2B">Descripción, amenidades y fotografía</span>
+              </div>
+              <label style="margin-top:24px;display:flex;flex-direction:column;gap:9px">
+                <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Descripción editorial <span style="font-weight:400;letter-spacing:0.02em;text-transform:none;color:#8B8578">— 2 párrafos, tono institucional</span></span>
+                <textarea rows="5" value="{{ f_desc }}" onChange="{{ set_desc }}" placeholder="Nave industrial de última generación dentro de un parque con caseta de acceso y vigilancia 24/7…" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:14px 15px;font-size:14.5px;line-height:1.65;color:#0B1B2B;background:#FFFFFF;resize:vertical;transition:border-color .2s ease,box-shadow .2s ease"></textarea>
+                <span style="font-size:11.5px;font-weight:400;color:#8B8578">{{ descCount }}</span>
+              </label>
+              <div style="margin-top:24px">
+                <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Amenidades y servicios</div>
+                <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:9px">
+                  <sc-for list="{{ amenidades }}" as="a" hint-placeholder-count="8">
+                    <button onClick="{{ a.toggle }}" style="{{ a.style }}">{{ a.mark }}{{ a.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="margin-top:28px">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                  <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Galería · {{ photoCount }}</div>
+                  <span style="font-size:11.5px;font-weight:400;color:#8B8578">JPG o WEBP · mínimo 2000 px de ancho · la primera es la portada</span>
+                </div>
+                <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,100%),1fr));gap:12px">
+                  <sc-for list="{{ photos }}" as="p" hint-placeholder-count="4">
+                    <div style="position:relative;aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:#0B1B2B">
+                      <img src="{{ p.src }}" alt="" style="width:100%;height:100%;object-fit:cover">
+                      <sc-if value="{{ p.cover }}" hint-placeholder-val="{{ false }}">
+                        <span style="position:absolute;top:8px;left:8px;background:#C9A96A;color:#0B1B2B;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:5px 8px;border-radius:2px">Portada</span>
+                      </sc-if>
+                      <button onClick="{{ p.remove }}" aria-label="Quitar foto" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:2px;border:0;background:rgba(8,17,28,0.75);color:#F5F2EA;font-size:14px;line-height:1;cursor:pointer">×</button>
+                    </div>
+                  </sc-for>
+                  <button onClick="{{ addPhoto }}" style="aspect-ratio:4/3;border:1px dashed rgba(11,27,43,0.28);border-radius:2px;background:#FAF8F2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;cursor:pointer;color:#8B8578;transition:border-color .25s ease,color .25s ease" style-hover="border-color:#A98A52;color:#A98A52">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 16V4"></path><path d="m7 9 5-5 5 5"></path><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path></svg>
+                    <span style="font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase">Subir fotos</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside style="{{ asideStyle }}">
+            <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;overflow:hidden">
+              <div style="padding:18px 20px;border-bottom:1px solid rgba(11,27,43,0.1);display:flex;align-items:center;justify-content:space-between;gap:12px">
+                <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Vista previa en el sitio</span>
+                <span style="font-size:11px;font-weight:400;color:#8B8578">Tarjeta</span>
+              </div>
+              <div style="padding:20px;background:#F5F2EA">
+                <div style="background:#FFFFFF;border:1px solid rgba(11,27,43,0.09);border-radius:4px;overflow:hidden">
+                  <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B1B2B">
+                    <img src="{{ previewImg }}" alt="" style="width:100%;height:100%;object-fit:cover">
+                    <span style="{{ previewBadge }}"><span style="{{ previewDot }}"></span>{{ f_estatus }}</span>
+                  </div>
+                  <div style="padding:18px 20px 20px">
+                    <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#A98A52">{{ previewKicker }}</div>
+                    <div style="margin-top:9px;font-family:'Instrument Serif',Georgia,serif;font-size:21px;line-height:1.15;color:#0B1B2B">{{ previewName }}</div>
+                    <div style="margin-top:7px;font-size:12.5px;font-weight:300;color:#8B8578">{{ f_zona }}, Qro.</div>
+                    <div style="margin-top:15px;padding-top:14px;border-top:1px solid rgba(11,27,43,0.1);display:flex;align-items:baseline;justify-content:space-between;gap:10px">
+                      <span style="font-size:15px;font-weight:700;color:#0B1B2B">{{ previewPrice }}</span>
+                      <span style="font-size:12.5px;font-weight:600;color:#57544B">{{ previewM2 }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:16px;background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:22px">
+              <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Publicación</div>
+              <div style="margin-top:18px;display:flex;flex-direction:column">
+                <sc-for list="{{ toggles }}" as="t" hint-placeholder-count="3">
+                  <button onClick="{{ t.toggle }}" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border:0;border-top:1px solid rgba(11,27,43,0.09);background:transparent;cursor:pointer;text-align:left;width:100%">
+                    <span style="min-width:0">
+                      <span style="display:block;font-size:13.5px;font-weight:500;color:#0B1B2B">{{ t.label }}</span>
+                      <span style="display:block;margin-top:3px;font-size:11.5px;font-weight:300;color:#8B8578">{{ t.note }}</span>
+                    </span>
+                    <span style="{{ t.trackStyle }}"><span style="{{ t.knobStyle }}"></span></span>
+                  </button>
+                </sc-for>
+              </div>
+              <label style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(11,27,43,0.09);display:flex;flex-direction:column;gap:9px">
+                <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#8B8578">Asesor responsable</span>
+                <select value="{{ f_asesor }}" onChange="{{ set_asesor }}" style="border:1px solid rgba(11,27,43,0.16);border-radius:2px;padding:13px 15px;font-size:14px;color:#0B1B2B;background:#FFFFFF;appearance:none;transition:border-color .2s ease,box-shadow .2s ease">
+                  <option value="Mariana Escobedo Luna">Mariana Escobedo Luna</option>
+                  <option value="Eduardo Sandoval Rivera">Eduardo Sandoval Rivera</option>
+                  <option value="Ricardo Ontiveros Paz">Ricardo Ontiveros Paz</option>
+                </select>
+              </label>
+            </div>
+
+            <div style="margin-top:16px;background:#0B1B2B;border-radius:3px;padding:22px">
+              <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#C9A96A">Listo para publicar</div>
+              <div style="margin-top:16px;display:flex;align-items:baseline;gap:12px">
+                <span style="font-family:'Instrument Serif',Georgia,serif;font-size:40px;line-height:1;color:#F5F2EA">{{ completion }}</span>
+                <span style="font-size:12px;font-weight:300;color:rgba(233,228,216,0.6)">{{ completionNote }}</span>
+              </div>
+              <div style="margin-top:14px;height:5px;background:rgba(245,242,234,0.16);border-radius:3px;overflow:hidden"><span data-motion="1" style="{{ completionBar }}"></span></div>
+              <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+                <button onClick="{{ publicar }}" style="{{ publishStyle }}">{{ publishLabel }}</button>
+                <button onClick="{{ guardar }}" style="border:1px solid rgba(245,242,234,0.32);background:transparent;color:#F5F2EA;font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:15px 18px;border-radius:2px;cursor:pointer;transition:background .25s ease" style-hover="background:rgba(245,242,234,0.1)">Guardar borrador</button>
+              </div>
+              <div style="margin-top:14px;font-size:11.5px;font-weight:300;color:rgba(233,228,216,0.5);line-height:1.6">{{ saveHint }}</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOtra }}" hint-placeholder-val="{{ false }}">
+      <div data-motion="1" style="padding:clamp(40px,7vw,90px) clamp(16px,3vw,36px) 90px;animation:fadeUp .4s ease both">
+        <div style="max-width:560px;background:#FFFFFF;border:1px solid rgba(11,27,43,0.1);border-radius:3px;padding:clamp(28px,3.4vw,46px)">
+          <div style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;color:#A98A52">Módulo en diseño</div>
+          <h2 style="margin:16px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(28px,3.4vw,42px);line-height:1.1;color:#0B1B2B">{{ pageTitle }}</h2>
+          <p style="margin:16px 0 0;font-size:15.5px;line-height:1.7;font-weight:300;color:#57544B">Esta sección aún no está diseñada. Dime qué necesitas ver aquí y la construyo con el mismo lenguaje del panel: tabla de inventario con filtros, bandeja de solicitudes o configuración del sitio.</p>
+          <div style="margin-top:26px;display:flex;gap:10px;flex-wrap:wrap">
+            <button onClick="{{ goPanel }}" style="background:#0B1B2B;color:#F5F2EA;border:0;font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:15px 20px;border-radius:2px;cursor:pointer;transition:background .25s ease" style-hover="background:#A98A52">Volver al panel</button>
+            <button onClick="{{ goNueva }}" style="background:transparent;color:#0B1B2B;border:1px solid rgba(11,27,43,0.28);font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:15px 20px;border-radius:2px;cursor:pointer;transition:background .25s ease,color .25s ease" style-hover="background:#0B1B2B;color:#F5F2EA">Cargar propiedad</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+</div>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div data-motion="1" style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:90;background:#0B1B2B;color:#F5F2EA;border:1px solid rgba(201,169,106,0.5);border-radius:3px;padding:15px 22px;display:flex;align-items:center;gap:12px;box-shadow:0 20px 44px -20px rgba(11,27,43,0.6);animation:fadeUp .3s ease both;max-width:calc(100vw - 32px)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A96A" stroke-width="1.8" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5"></path></svg>
+    <span style="font-size:13.5px;font-weight:500">{{ toastText }}</span>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440 }
+}">
+class Component extends DCLogic {
+  state = {
+    view: 'panel',
+    range: '30 días',
+    tipo: 'Industrial',
+    operacion: 'Renta',
+    estatus: 'Disponible',
+    nombre: 'Nave AAA El Marqués',
+    clave: 'CTR-IND-0421',
+    zona: 'El Marqués',
+    dir: 'Carr. Estatal 200 Km 4.5, Parque Industrial El Marqués',
+    m2: '12500',
+    terreno: '19800',
+    altura: '12.20',
+    andenes: '14',
+    kva: '2500',
+    anio: '2022',
+    precio: '95',
+    mant: '8.50 MXN / m²',
+    div: '6000',
+    desc: 'Nave industrial de última generación dentro de un parque con caseta de acceso y vigilancia 24/7, a 9 minutos del entronque con la carretera federal 57 y a 22 minutos del Aeropuerto Intercontinental de Querétaro.',
+    asesor: 'Mariana Escobedo Luna',
+    amen: ['Vigilancia 24/7', 'Fibra óptica', 'Comedor y vestidores'],
+    photos: 3,
+    toggles: [true, true, false],
+    toast: '',
+  };
+  nav = [
+    { key: 'panel', label: 'Panel', crumb: 'Resumen general', title: 'Panel de control' },
+    { key: 'propiedades', label: 'Propiedades', crumb: 'Inventario', title: 'Propiedades publicadas' },
+    { key: 'nueva', label: 'Nueva propiedad', crumb: 'Alta de ficha', title: 'Cargar nueva propiedad' },
+    { key: 'solicitudes', label: 'Solicitudes', crumb: 'Bandeja', title: 'Solicitudes de contacto', badge: '12' },
+    { key: 'metricas', label: 'Métricas', crumb: 'Analítica', title: 'Métricas del sitio' },
+  ];
+  allAmen = ['Vigilancia 24/7', 'Fibra óptica', 'Comedor y vestidores', 'Planta de tratamiento', 'Sprinklers ESFR', 'Ruta de personal', 'Certificación LEED', 'Andenes con niveladores', 'Piso superplano'];
+  pool = [
+    'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop',
+  ];
+  statusColor(s) {
+    return { 'Disponible': '#4FBF8B', 'Apartado': '#D9A441', 'Rentado': '#7FA6D9', 'Vendido': '#98A2AE' }[s] || '#4FBF8B';
+  }
+  set(key) {
+    return (e) => {
+      const v = e && e.target ? e.target.value : e;
+      this.setState({ [key]: v });
+    };
+  }
+  flash(text) {
+    this.setState({ toast: text });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+  fmt(n) { return Number(n || 0).toLocaleString('es-MX'); }
+  renderVals() {
+    const s = this.state;
+    const wide = this.wide;
+    const chipBase = 'border-radius:2px;padding:12px 16px;font-size:12.5px;font-weight:600;letter-spacing:0.04em;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease;display:inline-flex;align-items:center;gap:8px';
+    const chip = (on) => chipBase + (on
+      ? ';background:#0B1B2B;border:1px solid #0B1B2B;color:#F5F2EA'
+      : ';background:#FFFFFF;border:1px solid rgba(11,27,43,0.18);color:#57544B');
+
+    const navMain = this.nav.map((n) => ({
+      label: n.label,
+      badge: !!n.badge,
+      badgeLabel: n.badge || '',
+      go: () => this.setState({ view: n.key }),
+      dot: 'width:6px;height:6px;border-radius:50%;flex-shrink:0;background:' + (s.view === n.key ? '#C9A96A' : 'rgba(233,228,216,0.28)'),
+      style: 'width:100%;display:flex;align-items:center;gap:12px;padding:12px 10px;border:0;border-radius:2px;cursor:pointer;font-size:13.5px;font-weight:500;transition:background .2s ease,color .2s ease;' +
+        (s.view === n.key ? 'background:rgba(201,169,106,0.14);color:#F5F2EA' : 'background:transparent;color:rgba(233,228,216,0.72)'),
+      pillStyle: 'flex-shrink:0;border-radius:2px;padding:10px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;' +
+        (s.view === n.key ? 'background:#0B1B2B;border:1px solid #0B1B2B;color:#F5F2EA' : 'background:#FFFFFF;border:1px solid rgba(11,27,43,0.14);color:#57544B'),
+    }));
+
+    const current = this.nav.find((n) => n.key === s.view) || this.nav[0];
+    const mult = { '7 días': 0.26, '30 días': 1, '90 días': 2.85 }[s.range] || 1;
+    const kpiDefs = [
+      { label: 'Sesiones', base: 18420, delta: '+14.2%', up: true, note: 'Usuarios únicos: 12,860', seed: 3 },
+      { label: 'Fichas vistas', base: 9640, delta: '+21.8%', up: true, note: '2.4 fichas por sesión', seed: 7 },
+      { label: 'Solicitudes WhatsApp', base: 286, delta: '+9.4%', up: true, note: 'Tiempo de respuesta: 41 min', seed: 5 },
+      { label: 'Leads calificados', base: 74, delta: '−3.1%', up: false, note: '18 con visita agendada', seed: 11 },
+    ];
+    const kpis = kpiDefs.map((k) => {
+      const spark = Array.from({ length: 12 }, (_, i) => {
+        const h = 34 + Math.abs(Math.sin((i + k.seed) * 1.27)) * 62;
+        return { style: 'flex:1;min-width:2px;border-radius:1px;background:' + (i === 11 ? '#A98A52' : 'rgba(11,27,43,0.16)') + ';height:' + h.toFixed(0) + '%;transform-origin:bottom;animation:grow .6s cubic-bezier(.22,.61,.36,1) both;animation-delay:' + (i * 28) + 'ms' };
+      });
+      return {
+        label: k.label,
+        value: this.fmt(Math.round(k.base * mult)),
+        note: k.note,
+        delta: k.delta,
+        spark,
+        deltaStyle: 'font-size:11.5px;font-weight:700;letter-spacing:0.04em;padding:5px 9px;border-radius:2px;white-space:nowrap;' +
+          (k.up ? 'color:#2E8B5E;background:rgba(79,191,139,0.14)' : 'color:#C0402B;background:rgba(192,64,43,0.12)'),
+      };
+    });
+
+    const weeks = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10'];
+    const sess = [1180, 1360, 1240, 1580, 1720, 1610, 1980, 2140, 2060, 2380];
+    const reqs = [14, 19, 16, 24, 27, 22, 31, 36, 33, 41];
+    const maxS = Math.max(...sess);
+    const chart = weeks.map((w, i) => ({
+      label: w,
+      tipA: sess[i] + ' sesiones',
+      tipB: reqs[i] + ' solicitudes',
+      styleA: 'flex:1;max-width:22px;border-radius:2px 2px 0 0;background:#0B1B2B;height:' + ((sess[i] / maxS) * 100).toFixed(1) + '%;transform-origin:bottom;animation:grow .7s cubic-bezier(.22,.61,.36,1) both;animation-delay:' + (i * 45) + 'ms',
+      styleB: 'flex:1;max-width:22px;border-radius:2px 2px 0 0;background:#C9A96A;height:' + ((reqs[i] / 41) * 62).toFixed(1) + '%;transform-origin:bottom;animation:grow .7s cubic-bezier(.22,.61,.36,1) both;animation-delay:' + (i * 45 + 90) + 'ms',
+    }));
+
+    const srcDefs = [['Búsqueda orgánica', 46], ['Directo', 24], ['LinkedIn', 18], ['Campañas y referidos', 12]];
+    const sources = srcDefs.map(([label, pct]) => ({
+      label, pct: pct + '%',
+      barStyle: 'display:block;height:100%;width:' + pct + '%;background:' + (pct > 40 ? '#0B1B2B' : '#A98A52') + ';border-radius:3px',
+    }));
+
+    const rowDefs = [
+      ['Nave AAA El Marqués', 'CTR-IND-0421 · Industrial · Renta', 'Disponible', 2418, 46, '1.9%', 0],
+      ['Planta Parque Aeroespacial', 'CTR-IND-0388 · Industrial · Venta', 'Disponible', 1976, 31, '1.6%', 3],
+      ['Oficinas Corporativo Centro Sur', 'CTR-COM-0219 · Comercial · Venta', 'Disponible', 1642, 28, '1.7%', 4],
+      ['Nave logística 5 de Febrero', 'CTR-IND-0402 · Industrial · Venta', 'Apartado', 1310, 19, '1.5%', 2],
+      ['Local ancla Juriquilla', 'CTR-COM-0187 · Comercial · Renta', 'Rentado', 884, 9, '1.0%', 5],
+    ];
+    const rows = rowDefs.map(([name, meta, status, views, leads, conv, img]) => ({
+      name, meta, status, conv,
+      views: this.fmt(views), leads: this.fmt(leads),
+      img: this.pool[img],
+      badgeStyle: 'display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#57544B;background:#FAF8F2;border:1px solid rgba(11,27,43,0.1);padding:6px 10px;border-radius:2px;white-space:nowrap',
+      dotStyle: 'width:6px;height:6px;border-radius:50%;background:' + this.statusColor(status),
+    }));
+
+    const activity = [
+      { tag: '01', text: 'Mariana publicó “Nave AAA El Marqués” con 6 fotografías.', time: 'Hoy · 09:14' },
+      { tag: '02', text: 'Nueva solicitud por WhatsApp para CTR-IND-0388.', time: 'Hoy · 08:37' },
+      { tag: '03', text: 'Eduardo actualizó el precio de CTR-COM-0219 a $58,900,000 MXN.', time: 'Ayer · 18:02' },
+      { tag: '04', text: 'Ficha CTR-IND-0402 cambió a estatus Apartado.', time: 'Ayer · 12:45' },
+      { tag: '05', text: 'Ricardo cargó planos de CTR-COM-0187.', time: '9 ago · 16:20' },
+    ];
+
+    const photos = Array.from({ length: s.photos }, (_, i) => ({
+      src: this.pool[i % this.pool.length],
+      cover: i === 0,
+      remove: () => this.setState((st) => ({ photos: Math.max(0, st.photos - 1) })),
+    }));
+
+    const toggleDefs = [
+      ['Mostrar en “Propiedades destacadas”', 'Aparece en el grid del home'],
+      ['Publicar precio', 'Si se desactiva, muestra “Precio a consultar”'],
+      ['Ficha técnica descargable', 'Requiere PDF aprobado por dirección'],
+    ];
+    const toggles = toggleDefs.map(([label, note], i) => {
+      const on = s.toggles[i];
+      return {
+        label, note,
+        toggle: () => this.setState((st) => {
+          const t = st.toggles.slice();
+          t[i] = !t[i];
+          return { toggles: t };
+        }),
+        trackStyle: 'width:44px;height:24px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;padding:3px;transition:background .25s ease;background:' + (on ? '#A98A52' : 'rgba(11,27,43,0.18)'),
+        knobStyle: 'width:18px;height:18px;border-radius:50%;background:#FFFFFF;transition:transform .25s ease;transform:translateX(' + (on ? '20px' : '0') + ')',
+      };
+    });
+
+    const filled = [s.nombre, s.clave, s.zona, s.m2, s.precio, s.desc, s.altura, s.anio].filter((v) => String(v || '').trim()).length;
+    const pct = Math.min(100, Math.round(((filled / 8) * 78) + (s.photos >= 3 ? 22 : s.photos * 7)));
+    const isRenta = s.operacion === 'Renta';
+    const price = s.precio ? (isRenta ? '$' + this.fmt(s.precio) + ' MXN / m² / mes' : 'MXN $' + this.fmt(s.precio)) : 'Precio a consultar';
+
+    return {
+      shellCols: wide ? '272px minmax(0,1fr)' : 'minmax(0,1fr)',
+      chartCols: wide ? 'minmax(0,1.62fr) minmax(300px,0.9fr)' : 'minmax(0,1fr)',
+      formCols: wide ? 'minmax(0,1.55fr) minmax(320px,0.85fr)' : 'minmax(0,1fr)',
+      asideStyle: wide ? 'position:sticky;top:96px;min-width:0' : 'min-width:0',
+      navMain,
+      crumb: current.crumb,
+      pageTitle: current.title,
+      isPanel: s.view === 'panel',
+      isNueva: s.view === 'nueva',
+      isOtra: s.view !== 'panel' && s.view !== 'nueva',
+      goPanel: () => this.setState({ view: 'panel' }),
+      goNueva: () => this.setState({ view: 'nueva' }),
+      goPropiedades: () => this.setState({ view: 'propiedades' }),
+      rangeLabel: 'Últimos ' + s.range,
+      ranges: ['7 días', '30 días', '90 días'].map((r) => ({
+        label: r,
+        pick: () => this.setState({ range: r }),
+        style: 'border:0;border-radius:2px;padding:9px 14px;font-size:11.5px;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:background .2s ease,color .2s ease;' +
+          (s.range === r ? 'background:#0B1B2B;color:#F5F2EA' : 'background:transparent;color:#57544B'),
+      })),
+      kpis, chart, sources, rows, activity,
+      steps: ['Clasificación', 'Ubicación', 'Datos', 'Media'].map((label, i) => ({
+        label,
+        num: '0' + (i + 1),
+        sep: i < 3,
+        numStyle: 'width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;' +
+          (i === 0 ? 'background:#0B1B2B;color:#F5F2EA' : 'background:#FFFFFF;border:1px solid rgba(11,27,43,0.16);color:#8B8578'),
+        labelStyle: 'font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;color:' + (i === 0 ? '#0B1B2B' : '#8B8578'),
+      })),
+      tipos: ['Comercial', 'Industrial'].map((t) => ({ label: t, pick: () => this.setState({ tipo: t }), style: chip(s.tipo === t) })),
+      operaciones: ['Venta', 'Renta', 'Venta o renta'].map((o) => ({ label: o, pick: () => this.setState({ operacion: o }), style: chip(s.operacion === o) })),
+      estatus: ['Disponible', 'Apartado', 'Rentado', 'Vendido'].map((e) => ({
+        label: e,
+        pick: () => this.setState({ estatus: e }),
+        style: chip(s.estatus === e),
+        dot: 'width:7px;height:7px;border-radius:50%;background:' + this.statusColor(e),
+      })),
+      amenidades: this.allAmen.map((a) => {
+        const on = s.amen.includes(a);
+        return {
+          label: a,
+          mark: on ? '✓ ' : '+ ',
+          toggle: () => this.setState((st) => ({ amen: on ? st.amen.filter((x) => x !== a) : st.amen.concat(a) })),
+          style: 'border-radius:2px;padding:11px 15px;font-size:12.5px;font-weight:500;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease;' +
+            (on ? 'background:rgba(169,138,82,0.14);border:1px solid #A98A52;color:#0B1B2B' : 'background:#FFFFFF;border:1px solid rgba(11,27,43,0.16);color:#8B8578'),
+        };
+      }),
+      f_nombre: s.nombre, set_nombre: this.set('nombre'),
+      f_clave: s.clave, set_clave: this.set('clave'),
+      f_zona: s.zona, set_zona: this.set('zona'),
+      f_dir: s.dir, set_dir: this.set('dir'),
+      f_m2: s.m2, set_m2: this.set('m2'),
+      f_terreno: s.terreno, set_terreno: this.set('terreno'),
+      f_altura: s.altura, set_altura: this.set('altura'),
+      f_andenes: s.andenes, set_andenes: this.set('andenes'),
+      f_kva: s.kva, set_kva: this.set('kva'),
+      f_anio: s.anio, set_anio: this.set('anio'),
+      f_precio: s.precio, set_precio: this.set('precio'),
+      f_mant: s.mant, set_mant: this.set('mant'),
+      f_div: s.div, set_div: this.set('div'),
+      f_desc: s.desc, set_desc: this.set('desc'),
+      f_asesor: s.asesor, set_asesor: this.set('asesor'),
+      f_estatus: s.estatus,
+      precioLabel: isRenta ? 'Precio de renta por m² / mes' : 'Precio de venta total',
+      descCount: String(s.desc || '').length + ' caracteres · recomendado 420–900',
+      photoCount: s.photos + (s.photos === 1 ? ' fotografía' : ' fotografías'),
+      photos,
+      addPhoto: () => this.setState((st) => ({ photos: Math.min(this.pool.length, st.photos + 1) })),
+      toggles,
+      previewImg: this.pool[0],
+      previewName: s.nombre || 'Nombre de la propiedad',
+      previewKicker: s.tipo + ' · ' + s.operacion,
+      previewPrice: price,
+      previewM2: s.m2 ? this.fmt(s.m2) + ' m²' : '— m²',
+      previewBadge: 'position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:7px;background:rgba(8,17,28,0.72);color:#F5F2EA;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:6px 11px;border-radius:2px',
+      previewDot: 'width:6px;height:6px;border-radius:50%;background:' + this.statusColor(s.estatus),
+      completion: pct + '%',
+      completionNote: pct >= 100 ? 'Ficha completa' : 'Faltan campos o fotos',
+      completionBar: 'display:block;height:100%;width:' + pct + '%;background:#C9A96A;border-radius:3px;transition:width .4s ease',
+      publishLabel: pct >= 100 ? 'Publicar en el sitio' : 'Publicar (revisar pendientes)',
+      publishStyle: 'border:0;font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:16px 18px;border-radius:2px;cursor:pointer;transition:background .25s ease;' +
+        (pct >= 100 ? 'background:#C9A96A;color:#0B1B2B' : 'background:rgba(201,169,106,0.35);color:#F5F2EA'),
+      publicar: () => this.flash(pct >= 100 ? 'Ficha publicada — visible en el home' : 'Guardada para revisión: completa los campos pendientes'),
+      guardar: () => this.flash('Borrador guardado a las ' + new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })),
+      saveHint: 'Última edición automática hace 2 minutos · ' + s.asesor,
+      toast: !!s.toast,
+      toastText: s.toast,
+    };
+  }
+  componentDidMount() {
+    this.wide = window.innerWidth >= 1100;
+    this._onResize = () => {
+      const w = window.innerWidth >= 1100;
+      if (w !== this.wide) { this.wide = w; this.forceUpdate(); }
+    };
+    window.addEventListener('resize', this._onResize, { passive: true });
+    document.querySelectorAll('img').forEach((img) => {
+      const fix = () => {
+        if (img.dataset.fbk) { img.style.visibility = 'hidden'; return; }
+        img.dataset.fbk = '1';
+        img.src = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop';
+      };
+      img.addEventListener('error', fix);
+      if (img.complete && img.naturalWidth === 0 && img.src) fix();
+    });
+    this.forceUpdate();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    clearTimeout(this._t);
+  }
+}
+</script>
+</body>
+</html>
