@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F5F2EA;color:#0B1B2B;font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:#0B1B2B;text-decoration:none}
+a:hover{color:#A98A52}
+::selection{background:#A98A52;color:#FFFFFF}
+img{display:block}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes ping{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.75);opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}[data-motion]{animation:none !important;transition:none !important}}
+@media (max-width:1059px){[data-hide-mobile]{display:none !important}}
+@media (min-width:1060px){[data-hide-desktop]{display:none !important}}
+</style>
+</helmet>
+
+<nav data-nav="1" data-screen-label="Navegación" style="position:fixed;top:0;left:0;right:0;z-index:70;background:rgba(8,17,28,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(245,242,234,0.09);transition:background .35s ease">
+  <div style="max-width:1400px;margin:0 auto;padding:0 clamp(18px,4vw,48px);height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="#top" style="display:flex;align-items:center;gap:13px;color:#F5F2EA">
+      <span style="width:38px;height:38px;border:1px solid rgba(201,169,106,0.85);display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:22px;color:#C9A96A;flex-shrink:0">C</span>
+      <span style="display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:15px;font-weight:600;letter-spacing:0.22em;color:#F5F2EA">CANTERA</span>
+        <span style="font-size:8.5px;font-weight:500;letter-spacing:0.32em;color:rgba(233,228,216,0.6)">INMOBILIARIA CORPORATIVA</span>
+      </span>
+    </a>
+    <div data-hide-mobile="1" style="display:flex;align-items:center;gap:clamp(16px,2.2vw,32px)">
+      <a href="#top" style="font-size:13px;font-weight:500;color:#F5F2EA;letter-spacing:0.04em;white-space:nowrap" style-hover="color:#C9A96A">Inicio</a>
+      <a href="#comercial" style="font-size:13px;font-weight:500;color:rgba(233,228,216,0.82);letter-spacing:0.04em;white-space:nowrap" style-hover="color:#C9A96A">Comercial</a>
+      <a href="#industrial" style="font-size:13px;font-weight:500;color:rgba(233,228,216,0.82);letter-spacing:0.04em;white-space:nowrap" style-hover="color:#C9A96A">Industrial</a>
+      <a href="#servicios-financieros" style="font-size:13px;font-weight:500;color:rgba(233,228,216,0.82);letter-spacing:0.04em;white-space:nowrap" style-hover="color:#C9A96A">Servicios Financieros</a>
+      <a href="#nosotros" style="font-size:13px;font-weight:500;color:rgba(233,228,216,0.82);letter-spacing:0.04em;white-space:nowrap" style-hover="color:#C9A96A">Quiénes Somos</a>
+      <a href="#contacto" style="font-size:13px;font-weight:500;color:rgba(233,228,216,0.82);letter-spacing:0.04em;white-space:nowrap" style-hover="color:#C9A96A">Contacto</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px">
+      <div data-hide-mobile="1" style="display:flex;align-items:center;gap:8px;padding-right:18px;border-right:1px solid rgba(245,242,234,0.18)">
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.12em;color:#C9A96A;border-bottom:1px solid #C9A96A;padding-bottom:2px;cursor:default">ES</span>
+        <span style="font-size:12px;color:rgba(233,228,216,0.35)">/</span>
+        <a href="#top" title="English version" style="font-size:12px;font-weight:500;letter-spacing:0.12em;color:rgba(233,228,216,0.55)" style-hover="color:#F5F2EA">EN</a>
+      </div>
+      <a href="https://wa.me/524422458890?text=Hola%2C%20me%20interesa%20conocer%20el%20portafolio%20de%20Cantera." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;background:#1FA463;color:#FFFFFF;font-size:11.5px;font-weight:700;letter-spacing:0.12em;padding:11px 18px;border-radius:2px;transition:background .25s ease" style-hover="background:#178A52;color:#FFFFFF">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        <span data-hide-mobile="1">WhatsApp</span>
+      </a>
+      <button data-hide-desktop="1" onClick="{{ openMenu }}" aria-label="Abrir menú" style="width:44px;height:44px;background:transparent;border:1px solid rgba(245,242,234,0.28);border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer">
+        <span style="width:20px;height:1.5px;background:#F5F2EA;display:block"></span>
+        <span style="width:20px;height:1.5px;background:#F5F2EA;display:block"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-motion="1" style="position:fixed;inset:0;z-index:90;background:rgba(7,17,28,0.98);display:flex;flex-direction:column;padding:17px clamp(18px,5vw,40px) 36px;animation:fadeUp .3s ease both;overflow:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span style="display:flex;align-items:center;gap:12px">
+        <span style="width:36px;height:36px;border:1px solid rgba(201,169,106,0.85);display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:20px;color:#C9A96A">C</span>
+        <span style="font-size:14px;font-weight:600;letter-spacing:0.22em;color:#F5F2EA">CANTERA</span>
+      </span>
+      <button onClick="{{ closeMenu }}" aria-label="Cerrar menú" style="width:44px;height:44px;background:transparent;border:1px solid rgba(245,242,234,0.28);border-radius:2px;color:#F5F2EA;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">×</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:52px">
+      <a href="#top" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid rgba(245,242,234,0.1);color:#F5F2EA"><span style="font-size:11px;color:#C9A96A;font-weight:600;letter-spacing:0.1em">01</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:32px">Inicio</span></a>
+      <a href="#comercial" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid rgba(245,242,234,0.1);color:#F5F2EA"><span style="font-size:11px;color:#C9A96A;font-weight:600;letter-spacing:0.1em">02</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:32px">Comercial</span></a>
+      <a href="#industrial" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid rgba(245,242,234,0.1);color:#F5F2EA"><span style="font-size:11px;color:#C9A96A;font-weight:600;letter-spacing:0.1em">03</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:32px">Industrial</span></a>
+      <a href="#servicios-financieros" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid rgba(245,242,234,0.1);color:#F5F2EA"><span style="font-size:11px;color:#C9A96A;font-weight:600;letter-spacing:0.1em">04</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:32px">Servicios Financieros</span></a>
+      <a href="#nosotros" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid rgba(245,242,234,0.1);color:#F5F2EA"><span style="font-size:11px;color:#C9A96A;font-weight:600;letter-spacing:0.1em">05</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:32px">Quiénes Somos</span></a>
+      <a href="#contacto" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid rgba(245,242,234,0.1);color:#F5F2EA"><span style="font-size:11px;color:#C9A96A;font-weight:600;letter-spacing:0.1em">06</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:32px">Contacto</span></a>
+    </div>
+    <div style="margin-top:auto;padding-top:44px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:13px;font-weight:700;letter-spacing:0.12em;color:#C9A96A;border-bottom:1px solid #C9A96A;padding-bottom:2px">ES</span>
+        <span style="font-size:13px;color:rgba(233,228,216,0.35)">/</span>
+        <span title="English version" style="font-size:13px;font-weight:500;letter-spacing:0.12em;color:rgba(233,228,216,0.55);cursor:pointer">EN</span>
+      </div>
+      <a href="https://wa.me/524422458890?text=Hola%2C%20me%20interesa%20conocer%20el%20portafolio%20de%20Cantera." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;background:#1FA463;color:#FFFFFF;font-size:12px;font-weight:700;letter-spacing:0.12em;padding:13px 22px;border-radius:2px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</sc-if>
+
+<header id="top" data-screen-label="Hero" style="position:relative;background:#F5F2EA;min-height:100svh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:calc(78px + clamp(22px,4.5vh,58px)) clamp(16px,4vw,48px) clamp(24px,4vh,60px)">
+  <div style="width:100%;max-width:1400px;margin:0 auto;box-sizing:border-box">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(430px,100%),1fr));gap:clamp(22px,3.6vw,64px);align-items:start">
+      <h1 data-reveal="1" style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,min(6.4vw,9vh),104px);line-height:0.98;letter-spacing:-0.02em;color:#0B1B2B;text-wrap:balance"><em style="color:#A98A52;padding-right:0.12em">Invierta</em> en el Querétaro industrial</h1>
+      <div data-reveal="1" data-delay="140" style="display:flex;flex-direction:column;gap:clamp(18px,2.6vh,30px);padding-top:clamp(4px,1vh,14px)">
+        <p style="margin:0;font-size:clamp(14px,1.15vw,16.5px);line-height:1.62;font-weight:400;color:#3E4A55;text-align:justify;text-wrap:pretty">Corretaje de activos comerciales e industriales para inversionistas nacionales y extranjeros: naves, terrenos en parque, oficinas y usos mixtos, con acompañamiento desde el diagnóstico hasta la escrituración.</p>
+        <div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:clamp(14px,2.4vw,34px);align-items:center">
+          <div>
+            <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,3.4vw,46px);line-height:1;color:#0B1B2B;white-space:nowrap"><span data-count="420000">420,000</span><span style="color:#A98A52"> m²</span></div>
+            <div style="margin-top:8px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#8B8578">Comercializados en el Bajío</div>
+          </div>
+          <span style="width:1px;height:100%;min-height:52px;background:rgba(11,27,43,0.16);display:block"></span>
+          <div>
+            <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,3.4vw,46px);line-height:1;color:#0B1B2B;white-space:nowrap"><span data-count="350">350</span><span style="color:#A98A52">+</span></div>
+            <div style="margin-top:8px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#8B8578">Operaciones cerradas · 18 años</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal="1" data-delay="220" data-parallax-wrap="1" style="position:relative;margin-top:clamp(22px,3.6vh,48px);border-radius:14px;overflow:hidden;background:#0B1B2B;height:clamp(300px,44vh,520px)">
+      <video id="heroImg" data-parallax="0.12" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="auto" poster="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&amp;w=1800&amp;auto=format&amp;fit=crop" src="https://videos.pexels.com/video-files/7578554/7578554-hd_1920_1080_30fps.mp4" aria-label="Recorrido por un interior corporativo contemporáneo" style="position:absolute;left:0;top:-8%;width:100%;height:116%;object-fit:cover;will-change:transform"></video>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(180deg,rgba(7,17,28,0) 0%,rgba(7,17,28,0.42) 60%,rgba(7,17,28,0.6) 100%);pointer-events:none"></div>
+      <span style="position:absolute;top:clamp(14px,2vw,26px);left:clamp(14px,2vw,26px);font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#FFFFFF;background:rgba(8,17,28,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 13px;border-radius:999px">Comercial e Industrial · Querétaro</span>
+    </div>
+  </div>
+</header>
+
+<section id="comercial" data-screen-label="Comercial" style="background:#F5F2EA;scroll-margin-top:78px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(18px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(460px,100%),1fr));gap:clamp(44px,6vw,96px);align-items:center">
+    <div>
+      <div data-reveal="1" style="display:flex;align-items:center;gap:14px">
+        <span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:#A98A52">Portafolio · 01</span>
+        <span style="width:38px;height:1px;background:#A98A52"></span>
+      </div>
+      <h2 data-reveal="1" data-delay="80" style="margin:20px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(36px,4.4vw,62px);line-height:1.06;letter-spacing:-0.01em;color:#0B1B2B;text-wrap:balance">Comercial: espacios que <em style="color:#A98A52">trabajan</em> por su capital</h2>
+      <p data-reveal="1" data-delay="150" style="margin:24px 0 0;max-width:520px;font-size:16.5px;line-height:1.7;font-weight:300;color:#57544B">Oficinas corporativas, locales y proyectos de uso mixto en los corredores de mayor plusvalía de la zona metropolitana: Centro Sur, Juriquilla y Bernardo Quintana.</p>
+      <div data-reveal="1" data-delay="220" style="margin-top:34px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:baseline;gap:18px;padding:15px 0;border-top:1px solid rgba(11,27,43,0.12)"><span style="font-size:14.5px;font-weight:600;color:#0B1B2B;min-width:186px">Oficinas corporativas</span><span style="font-size:13.5px;font-weight:300;color:#8B8578">Pisos y edificios en corredores consolidados</span></div>
+        <div style="display:flex;align-items:baseline;gap:18px;padding:15px 0;border-top:1px solid rgba(11,27,43,0.12)"><span style="font-size:14.5px;font-weight:600;color:#0B1B2B;min-width:186px">Locales y plazas</span><span style="font-size:13.5px;font-weight:300;color:#8B8578">Ubicaciones ancla con flujo comprobado</span></div>
+        <div style="display:flex;align-items:baseline;gap:18px;padding:15px 0;border-top:1px solid rgba(11,27,43,0.12);border-bottom:1px solid rgba(11,27,43,0.12)"><span style="font-size:14.5px;font-weight:600;color:#0B1B2B;min-width:186px">Usos mixtos</span><span style="font-size:13.5px;font-weight:300;color:#8B8578">Proyectos con renta diversificada</span></div>
+      </div>
+      <div data-reveal="1" data-delay="280" style="margin-top:36px">
+        <a href="#propiedades" style="display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(11,27,43,0.3);color:#0B1B2B;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:17px 30px;border-radius:2px;transition:background .25s ease,color .25s ease" style-hover="background:#0B1B2B;color:#F5F2EA">Explorar comercial<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+      </div>
+    </div>
+    <div data-reveal="1" data-delay="120" style="position:relative">
+      <div style="position:absolute;top:26px;left:26px;right:-26px;bottom:-26px;border:1px solid rgba(169,138,82,0.45);pointer-events:none" data-hide-mobile="1"></div>
+      <figure data-parallax-wrap="1" style="margin:0;position:relative;aspect-ratio:4/4.6;overflow:hidden;border-radius:3px">
+        <img data-parallax="0.1" src="https://images.unsplash.com/photo-1493397212122-2b85dda8106b?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Fachada corporativa contemporánea" style="width:100%;height:114%;margin-top:-7%;object-fit:cover;will-change:transform">
+      </figure>
+      <figcaption style="margin-top:14px;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:15px;color:#8B8578">Centro Sur, Querétaro</figcaption>
+    </div>
+  </div>
+</section>
+
+<section id="industrial" data-screen-label="Industrial" style="background:#0B1B2B;scroll-margin-top:78px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(18px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(460px,100%),1fr));gap:clamp(44px,6vw,96px);align-items:center">
+    <div data-reveal="1" data-delay="120" style="position:relative">
+      <div style="position:absolute;top:26px;right:26px;left:-26px;bottom:-26px;border:1px solid rgba(201,169,106,0.35);pointer-events:none" data-hide-mobile="1"></div>
+      <figure data-parallax-wrap="1" style="margin:0;position:relative;aspect-ratio:4/4.6;overflow:hidden;border-radius:3px">
+        <img data-parallax="0.1" src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Nave industrial de gran altura" style="width:100%;height:114%;margin-top:-7%;object-fit:cover;will-change:transform">
+      </figure>
+      <figcaption style="margin-top:14px;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:15px;color:rgba(233,228,216,0.55)">Corredor Querétaro — El Marqués</figcaption>
+    </div>
+    <div>
+      <div data-reveal="1" style="display:flex;align-items:center;gap:14px">
+        <span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:#C9A96A">Portafolio · 02</span>
+        <span style="width:38px;height:1px;background:#C9A96A"></span>
+      </div>
+      <h2 data-reveal="1" data-delay="80" style="margin:20px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(36px,4.4vw,62px);line-height:1.06;letter-spacing:-0.01em;color:#F5F2EA;text-wrap:balance">Industrial: infraestructura para la <em style="color:#C9A96A">manufactura</em> global</h2>
+      <p data-reveal="1" data-delay="150" style="margin:24px 0 0;max-width:520px;font-size:16.5px;line-height:1.7;font-weight:300;color:rgba(233,228,216,0.8)">Naves AAA, terrenos y parques industriales en el hub logístico y aeroespacial del Bajío, con especificación internacional y disponibilidad inmediata para operaciones de manufactura y distribución.</p>
+      <div data-reveal="1" data-delay="220" style="margin-top:34px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:baseline;gap:18px;padding:15px 0;border-top:1px solid rgba(245,242,234,0.14)"><span style="font-size:14.5px;font-weight:600;color:#F5F2EA;min-width:186px">Naves AAA</span><span style="font-size:13.5px;font-weight:300;color:rgba(233,228,216,0.55)">Especificación internacional, listas para operar</span></div>
+        <div style="display:flex;align-items:baseline;gap:18px;padding:15px 0;border-top:1px solid rgba(245,242,234,0.14)"><span style="font-size:14.5px;font-weight:600;color:#F5F2EA;min-width:186px">Terrenos en parque</span><span style="font-size:13.5px;font-weight:300;color:rgba(233,228,216,0.55)">Superficies desde 5,000 m² con vocación logística</span></div>
+        <div style="display:flex;align-items:baseline;gap:18px;padding:15px 0;border-top:1px solid rgba(245,242,234,0.14);border-bottom:1px solid rgba(245,242,234,0.14)"><span style="font-size:14.5px;font-weight:600;color:#F5F2EA;min-width:186px">Built-to-suit</span><span style="font-size:13.5px;font-weight:300;color:rgba(233,228,216,0.55)">Desarrollo a la medida de su operación</span></div>
+      </div>
+      <div data-reveal="1" data-delay="280" style="margin-top:36px">
+        <a href="#propiedades" style="display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(245,242,234,0.35);color:#F5F2EA;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:17px 30px;border-radius:2px;transition:background .25s ease,color .25s ease,border-color .25s ease" style-hover="background:#C9A96A;border-color:#C9A96A;color:#0B1B2B">Explorar industrial<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="propiedades" data-screen-label="Propiedades destacadas" style="background:#F5F2EA;scroll-margin-top:78px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(18px,4vw,48px)">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap">
+      <div>
+        <div data-reveal="1" style="display:flex;align-items:center;gap:14px">
+          <span style="width:38px;height:1px;background:#A98A52"></span>
+          <span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:#A98A52">Selección del mes</span>
+        </div>
+        <h2 data-reveal="1" data-delay="80" style="margin:18px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(36px,4.4vw,62px);line-height:1.06;color:#0B1B2B">Propiedades <em style="color:#A98A52">destacadas</em></h2>
+      </div>
+      <a data-reveal="1" data-delay="140" href="https://wa.me/524422458890?text=Hola%2C%20quiero%20recibir%20el%20cat%C3%A1logo%20completo%20de%20propiedades." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;color:#0B1B2B;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;border-bottom:1px solid rgba(11,27,43,0.35);padding-bottom:6px" style-hover="color:#A98A52">Ver catálogo completo<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+    </div>
+    <div style="margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:26px">
+      <a href="Cantera Propiedad.dc.html" data-reveal="1" data-card="1" style="display:block;color:inherit;background:#FFFFFF;border:1px solid rgba(11,27,43,0.09);border-radius:4px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer" style-hover="transform:translateY(-6px);box-shadow:0 26px 52px -22px rgba(11,27,43,0.32)">
+        <div data-zoom="1" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B1B2B">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Nave industrial AAA" style="width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.61,.36,1)">
+          <span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(8,17,28,0.72);backdrop-filter:blur(6px);color:#F5F2EA;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:7px 12px;border-radius:2px"><span style="width:6px;height:6px;border-radius:50%;background:#4FBF8B"></span>Disponible</span>
+        </div>
+        <div style="padding:22px 24px 24px">
+          <div style="font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Industrial · Renta</div>
+          <h3 style="margin:10px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;color:#0B1B2B">Nave AAA El Marqués</h3>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:300;color:#8B8578"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>Parque Industrial El Marqués, Qro.</div>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(11,27,43,0.1);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span style="font-size:17px;font-weight:700;color:#0B1B2B">$95 MXN <span style="font-size:12px;font-weight:500;color:#8B8578">/ m² / mes</span></span>
+            <span style="font-size:13px;font-weight:600;color:#57544B">12,500 m²</span>
+          </div>
+        </div>
+      </a>
+      <a href="Cantera Propiedad.dc.html" data-reveal="1" data-delay="80" data-card="1" style="display:block;color:inherit;background:#FFFFFF;border:1px solid rgba(11,27,43,0.09);border-radius:4px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer" style-hover="transform:translateY(-6px);box-shadow:0 26px 52px -22px rgba(11,27,43,0.32)">
+        <div data-zoom="1" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B1B2B">
+          <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Edificio de oficinas corporativas" style="width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.61,.36,1)">
+          <span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(8,17,28,0.72);backdrop-filter:blur(6px);color:#F5F2EA;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:7px 12px;border-radius:2px"><span style="width:6px;height:6px;border-radius:50%;background:#4FBF8B"></span>Disponible</span>
+        </div>
+        <div style="padding:22px 24px 24px">
+          <div style="font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Comercial · Venta</div>
+          <h3 style="margin:10px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;color:#0B1B2B">Oficinas Corporativo Centro Sur</h3>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:300;color:#8B8578"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>Centro Sur, Querétaro</div>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(11,27,43,0.1);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span style="font-size:17px;font-weight:700;color:#0B1B2B">MXN $58,900,000</span>
+            <span style="font-size:13px;font-weight:600;color:#57544B">1,850 m²</span>
+          </div>
+        </div>
+      </a>
+      <a href="Cantera Propiedad.dc.html" data-reveal="1" data-delay="160" data-card="1" style="display:block;color:inherit;background:#FFFFFF;border:1px solid rgba(11,27,43,0.09);border-radius:4px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer" style-hover="transform:translateY(-6px);box-shadow:0 26px 52px -22px rgba(11,27,43,0.32)">
+        <div data-zoom="1" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B1B2B">
+          <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Nave logística" style="width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.61,.36,1)">
+          <span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(8,17,28,0.72);backdrop-filter:blur(6px);color:#F5F2EA;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:7px 12px;border-radius:2px"><span style="width:6px;height:6px;border-radius:50%;background:#D9A441"></span>Apartado</span>
+        </div>
+        <div style="padding:22px 24px 24px">
+          <div style="font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Industrial · Venta</div>
+          <h3 style="margin:10px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;color:#0B1B2B">Nave logística 5 de Febrero</h3>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:300;color:#8B8578"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>Corredor 5 de Febrero, Qro.</div>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(11,27,43,0.1);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span style="font-size:17px;font-weight:700;color:#0B1B2B">MXN $124,000,000</span>
+            <span style="font-size:13px;font-weight:600;color:#57544B">8,200 m²</span>
+          </div>
+        </div>
+      </a>
+      <a href="Cantera Propiedad.dc.html" data-reveal="1" data-card="1" style="display:block;color:inherit;background:#FFFFFF;border:1px solid rgba(11,27,43,0.09);border-radius:4px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer" style-hover="transform:translateY(-6px);box-shadow:0 26px 52px -22px rgba(11,27,43,0.32)">
+        <div data-zoom="1" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B1B2B">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Local comercial ancla" style="width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.61,.36,1);filter:grayscale(0.55)">
+          <span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(8,17,28,0.72);backdrop-filter:blur(6px);color:#F5F2EA;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:7px 12px;border-radius:2px"><span style="width:6px;height:6px;border-radius:50%;background:#7FA6D9"></span>Rentado</span>
+        </div>
+        <div style="padding:22px 24px 24px">
+          <div style="font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Comercial · Renta</div>
+          <h3 style="margin:10px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;color:#0B1B2B">Local ancla Juriquilla</h3>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:300;color:#8B8578"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>Juriquilla, Querétaro</div>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(11,27,43,0.1);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span style="font-size:17px;font-weight:700;color:#0B1B2B">$210,000 MXN <span style="font-size:12px;font-weight:500;color:#8B8578">/ mes</span></span>
+            <span style="font-size:13px;font-weight:600;color:#57544B">640 m²</span>
+          </div>
+        </div>
+      </a>
+      <a href="Cantera Propiedad.dc.html" data-reveal="1" data-delay="80" data-card="1" style="display:block;color:inherit;background:#FFFFFF;border:1px solid rgba(11,27,43,0.09);border-radius:4px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer" style-hover="transform:translateY(-6px);box-shadow:0 26px 52px -22px rgba(11,27,43,0.32)">
+        <div data-zoom="1" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B1B2B">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Planta industrial" style="width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.61,.36,1)">
+          <span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(8,17,28,0.72);backdrop-filter:blur(6px);color:#F5F2EA;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:7px 12px;border-radius:2px"><span style="width:6px;height:6px;border-radius:50%;background:#4FBF8B"></span>Disponible</span>
+        </div>
+        <div style="padding:22px 24px 24px">
+          <div style="font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Industrial · Venta</div>
+          <h3 style="margin:10px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;color:#0B1B2B">Planta Parque Aeroespacial</h3>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:300;color:#8B8578"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>Colón, Zona Aeropuerto, Qro.</div>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(11,27,43,0.1);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span style="font-size:17px;font-weight:700;color:#0B1B2B">MXN $186,500,000</span>
+            <span style="font-size:13px;font-weight:600;color:#57544B">15,300 m²</span>
+          </div>
+        </div>
+      </a>
+      <a href="Cantera Propiedad.dc.html" data-reveal="1" data-delay="160" data-card="1" style="display:block;color:inherit;background:#FFFFFF;border:1px solid rgba(11,27,43,0.09);border-radius:4px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer" style-hover="transform:translateY(-6px);box-shadow:0 26px 52px -22px rgba(11,27,43,0.32)">
+        <div data-zoom="1" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#0B1B2B">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Piso corporativo" style="width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.61,.36,1);filter:grayscale(0.55)">
+          <span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(8,17,28,0.72);backdrop-filter:blur(6px);color:#F5F2EA;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;padding:7px 12px;border-radius:2px"><span style="width:6px;height:6px;border-radius:50%;background:#98A2AE"></span>Vendido</span>
+        </div>
+        <div style="padding:22px 24px 24px">
+          <div style="font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:#A98A52">Comercial · Venta</div>
+          <h3 style="margin:10px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;color:#0B1B2B">Piso corporativo B. Quintana</h3>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:300;color:#8B8578"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>Av. Bernardo Quintana, Qro.</div>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(11,27,43,0.1);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span style="font-size:17px;font-weight:700;color:#0B1B2B">MXN $31,200,000</span>
+            <span style="font-size:13px;font-weight:600;color:#57544B">920 m²</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <p data-reveal="1" style="margin:28px 0 0;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:14.5px;color:#8B8578">Precios en pesos mexicanos (MXN). Información sujeta a disponibilidad y cambios sin previo aviso.</p>
+  </div>
+</section>
+
+<section data-screen-label="Interludio" style="background:#0B1B2B;overflow:hidden">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(110px,13vw,180px) clamp(18px,4vw,48px) clamp(70px,8vw,110px);text-align:center">
+    <div data-reveal="1" style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;font-weight:700;color:#C9A96A">Por qué Querétaro</div>
+    <h2 data-reveal="1" data-delay="90" style="margin:34px auto 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,6.6vw,94px);line-height:1.05;letter-spacing:-0.012em;color:#F5F2EA;max-width:18ch;text-wrap:balance">Querétaro no es una apuesta. <em style="color:#C9A96A">Es una estrategia.</em></h2>
+    <p data-reveal="1" data-delay="180" style="margin:32px auto 0;max-width:640px;font-size:16px;line-height:1.7;font-weight:300;color:rgba(233,228,216,0.72)">Crecimiento industrial sostenido, conectividad logística con los principales puertos y fronteras, y certeza jurídica: el Bajío concentra la nueva manufactura de Norteamérica.</p>
+  </div>
+  <div style="position:relative;padding-bottom:clamp(90px,10vw,130px)">
+    <div style="overflow:hidden;width:100%">
+      <div data-marquee-track="1" data-motion="1" style="display:flex;gap:22px;width:max-content;animation:marquee 45s linear infinite" style-hover="animation-play-state:paused">
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Torres corporativas" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Nave industrial" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Vista aérea urbana" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1439337153520-7082a56a81f4?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Arquitectura de cristal" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Operación logística" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1493397212122-2b85dda8106b?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Fachada contemporánea" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Interior corporativo" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+        <figure style="margin:0;width:clamp(240px,26vw,390px);aspect-ratio:3/2;overflow:hidden;border-radius:3px;flex-shrink:0"><img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Arquitectura moderna" style="width:100%;height:100%;object-fit:cover;opacity:0.92"></figure>
+      </div>
+    </div>
+    <div style="position:absolute;top:0;bottom:0;left:0;width:120px;background:linear-gradient(90deg,#0B1B2B,rgba(11,27,43,0));pointer-events:none"></div>
+    <div style="position:absolute;top:0;bottom:0;right:0;width:120px;background:linear-gradient(270deg,#0B1B2B,rgba(11,27,43,0));pointer-events:none"></div>
+  </div>
+</section>
+
+<section data-screen-label="Cómo trabajamos" style="background:#F5F2EA">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(18px,4vw,48px)">
+    <div data-reveal="1" style="display:flex;align-items:center;gap:14px">
+      <span style="width:38px;height:1px;background:#A98A52"></span>
+      <span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:#A98A52">Método</span>
+    </div>
+    <h2 data-reveal="1" data-delay="80" style="margin:18px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(36px,4.4vw,62px);line-height:1.06;color:#0B1B2B">Cómo <em style="color:#A98A52">trabajamos</em></h2>
+    <div style="margin-top:clamp(44px,5vw,68px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:clamp(32px,4vw,52px)">
+      <div data-reveal="1" style="border-top:1px solid rgba(11,27,43,0.14);padding-top:28px">
+        <div style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:clamp(64px,6vw,92px);line-height:1;color:#DCCFAE">01</div>
+        <h3 style="margin:22px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;color:#0B1B2B">Diagnóstico</h3>
+        <p style="margin:12px 0 0;font-size:15px;line-height:1.7;font-weight:300;color:#57544B">Entendemos su tesis de inversión, horizonte y perfil de riesgo para definir el activo correcto — no el disponible.</p>
+      </div>
+      <div data-reveal="1" data-delay="110" style="border-top:1px solid rgba(11,27,43,0.14);padding-top:28px">
+        <div style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:clamp(64px,6vw,92px);line-height:1;color:#DCCFAE">02</div>
+        <h3 style="margin:22px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;color:#0B1B2B">Búsqueda y negociación</h3>
+        <p style="margin:12px 0 0;font-size:15px;line-height:1.7;font-weight:300;color:#57544B">Presentamos oportunidades dentro y fuera del mercado abierto y negociamos precio y condiciones en su nombre.</p>
+      </div>
+      <div data-reveal="1" data-delay="220" style="border-top:1px solid rgba(11,27,43,0.14);padding-top:28px">
+        <div style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:clamp(64px,6vw,92px);line-height:1;color:#DCCFAE">03</div>
+        <h3 style="margin:22px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;color:#0B1B2B">Cierre y acompañamiento</h3>
+        <p style="margin:12px 0 0;font-size:15px;line-height:1.7;font-weight:300;color:#57544B">Coordinamos due diligence, escrituración y entrega. Y seguimos con usted después de la firma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios-financieros" data-screen-label="Servicios Financieros" style="background:#EFEBE0;border-top:1px solid rgba(11,27,43,0.08);border-bottom:1px solid rgba(11,27,43,0.08);scroll-margin-top:78px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(18px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:clamp(44px,6vw,96px);align-items:start">
+    <div>
+      <div data-reveal="1" style="display:flex;align-items:center;gap:14px">
+        <span style="width:38px;height:1px;background:#A98A52"></span>
+        <span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:#A98A52">Servicios financieros</span>
+      </div>
+      <h2 data-reveal="1" data-delay="80" style="margin:18px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(36px,4.4vw,62px);line-height:1.06;color:#0B1B2B;text-wrap:balance">Estructura para decidir con <em style="color:#A98A52">certeza</em></h2>
+      <p data-reveal="1" data-delay="150" style="margin:24px 0 0;max-width:540px;font-size:16.5px;line-height:1.7;font-weight:300;color:#57544B">Acompañamos cada operación con análisis y vinculación financiera para que la decisión de compra o renta se tome con números sobre la mesa.</p>
+      <div data-reveal="1" data-delay="220" style="margin-top:34px;display:flex;flex-direction:column">
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px 0;border-top:1px solid rgba(11,27,43,0.12)">
+          <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:18px;color:#A98A52">01</span>
+          <span><span style="display:block;font-size:15px;font-weight:600;color:#0B1B2B">Análisis de rentabilidad</span><span style="display:block;margin-top:4px;font-size:13.5px;font-weight:300;color:#8B8578">Proyecciones de flujo, cap rate y retorno por escenario.</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px 0;border-top:1px solid rgba(11,27,43,0.12)">
+          <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:18px;color:#A98A52">02</span>
+          <span><span style="display:block;font-size:15px;font-weight:600;color:#0B1B2B">Crédito puente y leasing</span><span style="display:block;margin-top:4px;font-size:13.5px;font-weight:300;color:#8B8578">Vinculación con banca y arrendadoras especializadas.</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px 0;border-top:1px solid rgba(11,27,43,0.12)">
+          <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:18px;color:#A98A52">03</span>
+          <span><span style="display:block;font-size:15px;font-weight:600;color:#0B1B2B">Sale &amp; leaseback</span><span style="display:block;margin-top:4px;font-size:13.5px;font-weight:300;color:#8B8578">Liquidez inmediata sin interrumpir su operación.</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px 0;border-top:1px solid rgba(11,27,43,0.12);border-bottom:1px solid rgba(11,27,43,0.12)">
+          <span style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:18px;color:#A98A52">04</span>
+          <span><span style="display:block;font-size:15px;font-weight:600;color:#0B1B2B">Estructuración de capital</span><span style="display:block;margin-top:4px;font-size:13.5px;font-weight:300;color:#8B8578">Vehículos y coinversión para adquisiciones mayores.</span></span>
+        </div>
+      </div>
+      <p data-reveal="1" data-delay="260" style="margin:26px 0 0;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:15px;color:#8B8578;max-width:480px">Área informativa y de acompañamiento: cada caso se atiende de forma personal, sin simuladores ni trámites en línea.</p>
+    </div>
+    <div data-reveal="1" data-delay="140" style="max-width:440px;justify-self:center;width:100%">
+      <div style="background:#0B1B2B;border-radius:4px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(11,27,43,0.5)">
+        <div style="aspect-ratio:4/3.4;overflow:hidden">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Eduardo Sandoval Rivera, Director de Servicios Financieros" style="width:100%;height:100%;object-fit:cover;object-position:center 20%">
+        </div>
+        <div style="padding:28px 30px 32px">
+          <div style="font-size:10.5px;letter-spacing:0.24em;text-transform:uppercase;font-weight:700;color:#C9A96A">Encargado del área</div>
+          <div style="margin-top:12px;font-family:'Instrument Serif',Georgia,serif;font-size:28px;line-height:1.1;color:#F5F2EA">Eduardo Sandoval Rivera</div>
+          <div style="margin-top:6px;font-size:13.5px;font-weight:400;color:rgba(233,228,216,0.65)">Director de Servicios Financieros</div>
+          <div style="margin-top:22px;padding-top:20px;border-top:1px solid rgba(245,242,234,0.14);display:flex;flex-direction:column;gap:12px">
+            <a href="mailto:esandoval@canterainmobiliaria.mx" style="display:flex;align-items:center;gap:11px;font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 6L2 7"></path></svg>esandoval@canterainmobiliaria.mx</a>
+            <a href="tel:+524422458890" style="display:flex;align-items:center;gap:11px;font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+52 (442) 245 8890 · Ext. 103</a>
+            <a href="https://wa.me/524422458890?text=Hola%20Eduardo%2C%20me%20interesa%20una%20asesor%C3%ADa%20financiera%20inmobiliaria." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;margin-top:6px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96A" style-hover="color:#F5F2EA">Escribir por WhatsApp<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" data-screen-label="Quiénes Somos" style="background:#F5F2EA;scroll-margin-top:78px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(90px,11vw,150px) clamp(18px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(460px,100%),1fr));gap:clamp(44px,6vw,96px);align-items:center">
+    <div data-reveal="1" data-delay="120">
+      <figure data-parallax-wrap="1" style="margin:0;position:relative;aspect-ratio:4/3.1;overflow:hidden;border-radius:3px">
+        <img data-parallax="0.09" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Equipo de Cantera en sesión de trabajo" style="width:100%;height:114%;margin-top:-7%;object-fit:cover;will-change:transform">
+      </figure>
+      <figcaption style="margin-top:14px;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:15px;color:#8B8578">Comité de inversión — oficinas Centro Sur</figcaption>
+    </div>
+    <div>
+      <div data-reveal="1" style="display:flex;align-items:center;gap:14px">
+        <span style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:#A98A52">La firma</span>
+        <span style="width:38px;height:1px;background:#A98A52"></span>
+      </div>
+      <h2 data-reveal="1" data-delay="80" style="margin:20px 0 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(36px,4.4vw,62px);line-height:1.06;color:#0B1B2B;text-wrap:balance">Criterio local, <em style="color:#A98A52">estándar</em> institucional</h2>
+      <p data-reveal="1" data-delay="150" style="margin:24px 0 0;max-width:540px;font-size:16.5px;line-height:1.7;font-weight:300;color:#57544B">Desde 2008 acompañamos a empresas, fondos e inversionistas patrimoniales en la adquisición, renta y gestión de inmuebles comerciales e industriales en Querétaro y el Bajío.</p>
+      <p data-reveal="1" data-delay="200" style="margin:16px 0 0;max-width:540px;font-size:16.5px;line-height:1.7;font-weight:300;color:#57544B">Corretaje institucional, análisis financiero y gestión de activos bajo un mismo criterio: proteger y hacer crecer su patrimonio.</p>
+      <div data-reveal="1" data-delay="240" style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+        <span style="font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#57544B;border:1px solid rgba(11,27,43,0.18);padding:9px 16px;border-radius:2px">Corretaje</span>
+        <span style="font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#57544B;border:1px solid rgba(11,27,43,0.18);padding:9px 16px;border-radius:2px">Análisis</span>
+        <span style="font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#57544B;border:1px solid rgba(11,27,43,0.18);padding:9px 16px;border-radius:2px">Gestión de activos</span>
+      </div>
+      <div data-reveal="1" data-delay="280" style="margin-top:36px">
+        <a href="#contacto" style="display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(11,27,43,0.3);color:#0B1B2B;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:17px 30px;border-radius:2px;transition:background .25s ease,color .25s ease" style-hover="background:#0B1B2B;color:#F5F2EA">Conocer la firma<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" data-screen-label="Contacto" style="background:#0B1B2B;scroll-margin-top:78px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(100px,12vw,170px) clamp(18px,4vw,48px);text-align:center">
+    <div data-reveal="1" style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;font-weight:700;color:#C9A96A">Contacto</div>
+    <h2 data-reveal="1" data-delay="90" style="margin:30px auto 0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,88px);line-height:1.05;color:#F5F2EA;max-width:16ch;text-wrap:balance">Hablemos de su <em style="color:#C9A96A">siguiente</em> inversión</h2>
+    <p data-reveal="1" data-delay="170" style="margin:28px auto 0;max-width:560px;font-size:16px;line-height:1.7;font-weight:300;color:rgba(233,228,216,0.75)">Agende una llamada con nuestro equipo o escríbanos por WhatsApp. Respondemos el mismo día hábil.</p>
+    <div data-reveal="1" data-delay="240" style="margin-top:42px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+      <a href="mailto:contacto@canterainmobiliaria.mx?subject=Quiero%20agendar%20una%20llamada" style="display:inline-flex;align-items:center;gap:12px;background:#B08C4F;color:#0B1B2B;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:18px 32px;border-radius:2px;transition:background .25s ease,color .25s ease" style-hover="background:#F5F2EA;color:#0B1B2B">Agendar una llamada</a>
+      <a href="https://wa.me/524422458890?text=Hola%2C%20quiero%20hablar%20sobre%20una%20inversi%C3%B3n%20inmobiliaria." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:11px;border:1px solid rgba(245,242,234,0.38);color:#F5F2EA;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:18px 30px;border-radius:2px;transition:background .25s ease,border-color .25s ease" style-hover="background:rgba(245,242,234,0.1);border-color:#F5F2EA;color:#F5F2EA">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer data-screen-label="Footer" style="background:#081524;border-top:1px solid rgba(245,242,234,0.1)">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(64px,7vw,96px) clamp(18px,4vw,48px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:clamp(40px,5vw,64px)">
+    <div>
+      <div style="display:flex;align-items:center;gap:13px">
+        <span style="width:38px;height:38px;border:1px solid rgba(201,169,106,0.85);display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:22px;color:#C9A96A">C</span>
+        <span style="display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:15px;font-weight:600;letter-spacing:0.22em;color:#F5F2EA">CANTERA</span>
+          <span style="font-size:8.5px;font-weight:500;letter-spacing:0.32em;color:rgba(233,228,216,0.6)">INMOBILIARIA CORPORATIVA</span>
+        </span>
+      </div>
+      <p style="margin:22px 0 0;font-size:14px;line-height:1.7;font-weight:300;color:rgba(233,228,216,0.6);max-width:300px">Firma inmobiliaria corporativa especializada en activos comerciales e industriales en Querétaro, México.</p>
+      <div style="margin-top:24px;display:flex;gap:12px">
+        <a href="#top" aria-label="LinkedIn" title="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(245,242,234,0.16);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(233,228,216,0.7);transition:border-color .25s ease,color .25s ease" style-hover="color:#C9A96A;border-color:rgba(201,169,106,0.6)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
+        <a href="#top" aria-label="Instagram" title="Instagram" style="width:40px;height:40px;border:1px solid rgba(245,242,234,0.16);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(233,228,216,0.7);transition:border-color .25s ease,color .25s ease" style-hover="color:#C9A96A;border-color:rgba(201,169,106,0.6)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.8" cy="6.2" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+        <a href="#top" aria-label="Facebook" title="Facebook" style="width:40px;height:40px;border:1px solid rgba(245,242,234,0.16);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(233,228,216,0.7);transition:border-color .25s ease,color .25s ease" style-hover="color:#C9A96A;border-color:rgba(201,169,106,0.6)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        <a href="#top" aria-label="X" title="X" style="width:40px;height:40px;border:1px solid rgba(245,242,234,0.16);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(233,228,216,0.7);transition:border-color .25s ease,color .25s ease" style-hover="color:#C9A96A;border-color:rgba(201,169,106,0.6)"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:700;color:#C9A96A;margin-bottom:20px">Contacto</div>
+      <p style="margin:0;font-size:14px;line-height:1.8;font-weight:300;color:rgba(233,228,216,0.75)">Av. Bernardo Quintana 7001, Torre 1 — Piso 4<br>Centro Sur, 76090<br>Santiago de Querétaro, Qro., México</p>
+      <div style="margin-top:18px;display:flex;flex-direction:column;gap:9px">
+        <a href="tel:+524422458890" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">+52 (442) 245 8890</a>
+        <a href="mailto:contacto@canterainmobiliaria.mx" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">contacto@canterainmobiliaria.mx</a>
+        <span style="font-size:13px;font-weight:300;color:rgba(233,228,216,0.5)">Lunes a viernes · 9:00 — 18:00 h</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:700;color:#C9A96A;margin-bottom:20px">Índice</div>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <a href="#top" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">Inicio</a>
+        <a href="#comercial" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">Comercial</a>
+        <a href="#industrial" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">Industrial</a>
+        <a href="#servicios-financieros" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">Servicios Financieros</a>
+        <a href="#nosotros" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">Quiénes Somos</a>
+        <a href="#contacto" style="font-size:14px;color:rgba(233,228,216,0.85)" style-hover="color:#C9A96A">Contacto</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:700;color:#C9A96A;margin-bottom:20px">Ubicación</div>
+      <iframe title="Mapa — Santiago de Querétaro" src="https://www.openstreetmap.org/export/embed.html?bbox=-100.4600%2C20.5500%2C-100.3200%2C20.6400&amp;layer=mapnik&amp;marker=20.5888%2C-100.3899" loading="lazy" style="width:100%;height:200px;border:0;border-radius:3px;filter:grayscale(1) invert(0.92) hue-rotate(180deg) contrast(0.9);display:block"></iframe>
+      <a href="https://maps.google.com/?q=Av.+Bernardo+Quintana+7001,+Centro+Sur,+Quer%C3%A9taro" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(233,228,216,0.7)" style-hover="color:#C9A96A">Abrir en Google Maps<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg></a>
+    </div>
+  </div>
+  <div style="max-width:1400px;margin:48px auto 0;padding:26px clamp(18px,4vw,48px);border-top:1px solid rgba(245,242,234,0.08);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <span style="font-size:12px;font-weight:300;color:rgba(233,228,216,0.45)">© 2026 Cantera Inmobiliaria Corporativa, S.A.P.I. de C.V. Todos los derechos reservados.</span>
+    <span style="display:flex;gap:22px">
+      <a href="#contacto" style="font-size:12px;color:rgba(233,228,216,0.6)" style-hover="color:#C9A96A">Aviso de Privacidad</a>
+      <a href="#contacto" style="font-size:12px;color:rgba(233,228,216,0.6)" style-hover="color:#C9A96A">Términos y Condiciones</a>
+    </span>
+  </div>
+</footer>
+
+<a href="https://wa.me/524422458890?text=Hola%2C%20me%20interesa%20conocer%20el%20portafolio%20de%20Cantera." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" title="Escribir por WhatsApp" style="position:fixed;bottom:26px;right:26px;z-index:80;width:58px;height:58px;border-radius:50%;background:#1FA463;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(8,60,35,0.4);transition:transform .25s ease" style-hover="transform:scale(1.08)">
+  <span data-motion="1" style="position:absolute;inset:0;border-radius:50%;border:2px solid rgba(31,164,99,0.55);animation:ping 2.4s ease-out infinite;pointer-events:none"></span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+</a>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;motion&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Animación&quot; },
+  &quot;marqueeSpeed&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 45, &quot;min&quot;: 20, &quot;max&quot;: 90, &quot;step&quot;: 5, &quot;unit&quot;: &quot;s&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Animación&quot; },
+  &quot;heroVideo&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;interior&quot;, &quot;corporativo&quot;], &quot;default&quot;: &quot;interior&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Hero&quot; }
+}">
+class Component extends DCLogic {
+  state = { menuOpen: false };
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+    };
+  }
+  motionOn() {
+    return (this.props.motion ?? true) && !this.reduced;
+  }
+  fmt(n) { return n.toLocaleString('es-MX'); }
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.revealed = new WeakSet();
+    this.counted = new WeakSet();
+    const qa = (s) => [...document.querySelectorAll(s)];
+    this.qa = qa;
+    // image fallbacks (broken placeholder URLs get a safe replacement)
+    const pool = [
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=1200&auto=format&fit=crop',
+    ];
+    let pi = 0;
+    const fix = (img) => {
+      if (img.dataset.fbk === '2') { img.style.visibility = 'hidden'; return; }
+      img.dataset.fbk = img.dataset.fbk ? '2' : '1';
+      img.src = pool[pi++ % pool.length];
+    };
+    qa('img').forEach((img) => {
+      img.addEventListener('error', () => fix(img));
+      if (img.complete && img.naturalWidth === 0 && img.src) fix(img);
+    });
+    // marquee: duplicate items for seamless loop
+    const track = document.querySelector('[data-marquee-track]');
+    if (track && !track.dataset.dup) { track.dataset.dup = '1'; track.innerHTML += track.innerHTML; }
+    // hover zoom on card images
+    if (!this.reduced) qa('[data-zoom]').forEach((w) => {
+      const im = w.querySelector('img');
+      if (!im) return;
+      w.addEventListener('mouseenter', () => { im.style.transform = 'scale(1.055)'; });
+      w.addEventListener('mouseleave', () => { im.style.transform = ''; });
+    });
+    // observers
+    this.revealIO = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      this.revealed.add(el);
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      this.revealIO.unobserve(el);
+    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    this.countIO = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      this.countIO.unobserve(e.target);
+      this.runCount(e.target);
+    }), { threshold: 0.4 });
+    this.pxEls = qa('[data-parallax]');
+    this.nav = document.querySelector('[data-nav]');
+    this._onScroll = () => {
+      if (this.nav) this.nav.style.background = window.scrollY > 50 ? 'rgba(8,17,28,0.96)' : 'rgba(8,17,28,0.92)';
+      this.pxTick();
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onResize = () => this.pxTick();
+    window.addEventListener('resize', this._onResize, { passive: true });
+    this.setMotion(this.motionOn());
+    this._lastM = this.motionOn();
+    this.applyTweaks();
+    this._onScroll();
+    this._mounted = true;
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onResize);
+    if (this.revealIO) this.revealIO.disconnect();
+    if (this.countIO) this.countIO.disconnect();
+  }
+  componentDidUpdate() {
+    this.applyTweaks();
+    const m = this.motionOn();
+    if (m !== this._lastM) { this._lastM = m; this.setMotion(m); }
+  }
+  applyTweaks() {
+    const track = document.querySelector('[data-marquee-track]');
+    if (track) track.style.animationDuration = (this.props.marqueeSpeed ?? 45) + 's';
+    const hero = document.getElementById('heroImg');
+    if (hero && hero.tagName === 'VIDEO') {
+      const urls = {
+        interior: 'https://videos.pexels.com/video-files/7578554/7578554-hd_1920_1080_30fps.mp4',
+        corporativo: 'https://videos.pexels.com/video-files/8302387/8302387-uhd_2732_1440_25fps.mp4',
+      };
+      const url = urls[(this.props.heroVideo ?? 'interior')] || urls.interior;
+      if (hero.getAttribute('src') !== url) { hero.setAttribute('src', url); hero.load(); }
+      if (this.reduced) hero.pause();
+      else { const p = hero.play(); if (p && p.catch) p.catch(() => {}); }
+    }
+  }
+  setMotion(on) {
+    const vh = window.innerHeight;
+    this.qa('[data-reveal]').forEach((el) => {
+      if (!on) {
+        el.style.transition = 'none';
+        el.style.opacity = '';
+        el.style.transform = '';
+        this.revealIO.unobserve(el);
+        return;
+      }
+      if (this.revealed.has(el)) return;
+      const r = el.getBoundingClientRect();
+      if (r.top > vh * 0.88) {
+        const dl = el.dataset.delay || 0;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+        el.style.transition = 'opacity .95s cubic-bezier(.22,.61,.36,1) ' + dl + 'ms, transform .95s cubic-bezier(.22,.61,.36,1) ' + dl + 'ms';
+        this.revealIO.observe(el);
+      } else {
+        this.revealed.add(el);
+      }
+    });
+    this.qa('[data-count]').forEach((el) => {
+      if (!on) {
+        this.counted.add(el);
+        this.countIO.unobserve(el);
+        el.textContent = this.fmt(+el.dataset.count);
+        return;
+      }
+      if (this.counted.has(el)) return;
+      const r = el.getBoundingClientRect();
+      if (r.top > vh * 0.85) { el.textContent = '0'; this.countIO.observe(el); }
+      else this.counted.add(el);
+    });
+    this.pxTick();
+  }
+  runCount(el) {
+    if (this.counted.has(el)) return;
+    this.counted.add(el);
+    const target = +el.dataset.count;
+    const dur = 1600;
+    const t0 = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - t0) / dur);
+      el.textContent = this.fmt(Math.round(target * (1 - Math.pow(1 - t, 3))));
+      if (t < 1 && this.motionOn()) requestAnimationFrame(step);
+      else el.textContent = this.fmt(target);
+    };
+    requestAnimationFrame(step);
+  }
+  pxTick() {
+    if (this._px) return;
+    this._px = true;
+    requestAnimationFrame(() => {
+      this._px = false;
+      const on = this.motionOn() && window.innerWidth > 760;
+      const vh = window.innerHeight;
+      (this.pxEls || []).forEach((el) => {
+        if (!on) { el.style.transform = ''; return; }
+        const wrap = el.closest('[data-parallax-wrap]') || el.parentElement;
+        const r = wrap.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > vh + 100) return;
+        const p = (r.top + r.height / 2 - vh / 2) / vh;
+        const f = parseFloat(el.dataset.parallax) || 0.12;
+        const ty = Math.max(-60, Math.min(60, -p * f * 260));
+        el.style.transform = 'translateY(' + ty + 'px)';
+      });
+    });
+  }
+}
+</script>
+</body>
+</html>
